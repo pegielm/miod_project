@@ -13,4 +13,4 @@
 4. Jakub Miśta
 
 ## Inspiracja
-[Chrome Dino]https://chromedino.com/
+[Chrome Dino](https://chromedino.com/)
