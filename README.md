@@ -1,10 +1,10 @@
 # miod
 
 ## Zamysł gry
-Gra typu runner
-Główny bohater - niedźwiedź
-Zbieranie garnków miodu
-Przeskakiwanie przez płoty, wrogów(pszczół?) itp
+ - Gra typu runner
+ - Główny bohater - niedźwiedź
+ - Zbieranie garnków miodu
+ - Przeskakiwanie przez płoty, wrogów(pszczół?) itp
 
 ## Autorzy
 1. Michał Pęgiel
