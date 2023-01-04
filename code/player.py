@@ -5,8 +5,9 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, pos, group):
         super().__init__(group)
         # setup
-        self.image = pygame.Surface((64, 32))
-        self.image.fill('green')
+        self.image = pygame.image.load("../sprites/bear.png")
+        self.image.set_colorkey((255, 255, 255))
+        # self.image.fill('green')
         self.rect = self.image.get_rect(center=pos)
 
         self.direction = pygame.math.Vector2()
