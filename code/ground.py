@@ -9,4 +9,4 @@ class Ground(pygame.sprite.Sprite):
         self.image.set_colorkey((255, 255, 255))
         self.rect = self.image.get_rect(center=pos)
         self.direction = pygame.math.Vector2()
-        self.pos = pygame.math.Vector2(self.rect.center)  # pozycja gracza
+        self.pos = pygame.math.Vector2(self.rect.center)
