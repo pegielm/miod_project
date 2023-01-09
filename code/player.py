@@ -12,6 +12,7 @@ class Player(pygame.sprite.Sprite):
         self.image.set_colorkey((255, 255, 255))
         # self.image.fill('green')
         self.rect = self.image.get_rect(center=pos)
+        self.rect = self.rect.inflate(-40, -40)
 
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)  # pozycja gracza
@@ -24,11 +25,7 @@ class Player(pygame.sprite.Sprite):
     def input(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP] or keys[pygame.K_SPACE]:
-            # self.direction.y = -1
-            if self.status is "stand":
-                self.status = "jump"
-        # else:
-        #     self.direction.y = 0
+            self.jump = True
 
     def move(self, dt):
 
@@ -44,9 +41,9 @@ class Player(pygame.sprite.Sprite):
         if self.rect.bottom < 238 and self.status is "jump":
 
         if self.jump is True and self.direction.y == -1:
-            self.speed -= 1100 * dt
+            self.speed -= 1300 * dt
         elif self.jump is True and self.direction.y == 1:
-            self.speed += 1100 * dt
+            self.speed += 1300 * dt
         if self.jump is True and self.pos.y == 480:
             self.direction.y = -1
         if self.pos.y < 180:
@@ -56,8 +53,6 @@ class Player(pygame.sprite.Sprite):
             self.jump = False
             self.pos.y = 480
             self.speed = 900
-
-        print(self.speed, self.pos.y)
 
     def update(self, dt):  # funkcja aktualizująca stan obiektu
         self.input()
