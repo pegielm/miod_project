@@ -41,9 +41,9 @@ class Player(pygame.sprite.Sprite):
         self.rect.centery = self.pos.y
 
         if self.jump is True and self.direction.y == -1:
-            self.speed -= 500 * dt
+            self.speed -= 1100 * dt
         elif self.jump is True and self.direction.y == 1:
-            self.speed += 500 * dt
+            self.speed += 1100 * dt
         if self.jump is True and self.pos.y == 480:
             self.direction.y = -1
         if self.pos.y < 180:
