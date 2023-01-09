@@ -15,8 +15,8 @@ class Player(pygame.sprite.Sprite):
 
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)  # pozycja gracza
-        self.speed = 1200
-        self.status = "stand"
+        self.speed = 900
+        self.jump = False
 
     def import_assets(self):
         self.animations = {'up': [], 'down': [], 'left': [], 'right': []}  # tworzenie słownika animacji
@@ -43,19 +43,21 @@ class Player(pygame.sprite.Sprite):
         # jump
         if self.rect.bottom < 238 and self.status is "jump":
 
-            self.status = "fall"
-        if self.rect.bottom > 538 and self.status is "fall":
-            self.status = "stand"
-
-        if self.status is "stand":
-            self.direction.y = 0
-        if self.status is "jump":
+        if self.jump is True and self.direction.y == -1:
+            self.speed -= 1100 * dt
+        elif self.jump is True and self.direction.y == 1:
+            self.speed += 1100 * dt
+        if self.jump is True and self.pos.y == 480:
             self.direction.y = -1
-        if self.status is "fall":
+        if self.pos.y < 180:
             self.direction.y = 1
+        elif self.pos.y > 480 and self.jump is True:
+            self.direction.y = 0
+            self.jump = False
+            self.pos.y = 480
+            self.speed = 900
 
-
-        print(self.speed, self.direction.y,self.status,dt,self.rect.bottom)
+        print(self.speed, self.pos.y)
 
     def update(self, dt):  # funkcja aktualizująca stan obiektu
         self.input()
