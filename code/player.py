@@ -24,10 +24,7 @@ class Player(pygame.sprite.Sprite):
     def input(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP] or keys[pygame.K_SPACE]:
-            # self.direction.y = -1
             self.jump = True
-        # else:
-        #     self.direction.y = 0
 
     def move(self, dt):
 
@@ -41,9 +38,9 @@ class Player(pygame.sprite.Sprite):
         self.rect.centery = self.pos.y
 
         if self.jump is True and self.direction.y == -1:
-            self.speed -= 1100 * dt
+            self.speed -= 1300 * dt
         elif self.jump is True and self.direction.y == 1:
-            self.speed += 1100 * dt
+            self.speed += 1300 * dt
         if self.jump is True and self.pos.y == 480:
             self.direction.y = -1
         if self.pos.y < 180:
@@ -53,8 +50,6 @@ class Player(pygame.sprite.Sprite):
             self.jump = False
             self.pos.y = 480
             self.speed = 900
-
-        print(self.speed, self.pos.y)
 
     def update(self, dt):  # funkcja aktualizująca stan obiektu
         self.input()
