@@ -25,7 +25,8 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP] or keys[pygame.K_SPACE]:
             # self.direction.y = -1
-            self.jump = True
+            if self.status is "stand":
+                self.status = "jump"
         # else:
         #     self.direction.y = 0
 
@@ -39,6 +40,8 @@ class Player(pygame.sprite.Sprite):
         # vertical movement
         self.pos.y += self.direction.y * self.speed * dt
         self.rect.centery = self.pos.y
+        # jump
+        if self.rect.bottom < 238 and self.status is "jump":
 
         if self.jump is True and self.direction.y == -1:
             self.speed -= 1100 * dt
