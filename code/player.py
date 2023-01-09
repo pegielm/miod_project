@@ -37,8 +37,6 @@ class Player(pygame.sprite.Sprite):
         # vertical movement
         self.pos.y += self.direction.y * self.speed * dt
         self.rect.centery = self.pos.y
-        # jump
-        if self.rect.bottom < 238 and self.status is "jump":
 
         if self.jump is True and self.direction.y == -1:
             self.speed -= 1300 * dt
