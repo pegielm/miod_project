@@ -11,6 +11,8 @@ class Enemy(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, size)
         self.image.set_colorkey((255, 255, 255))
         self.rect = self.image.get_rect(center=pos)
+        self.rect = self.rect.inflate(-10, -10)
+
 
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)
@@ -32,10 +34,14 @@ class Enemy(pygame.sprite.Sprite):
 
         self.direction.x = -1
 
-        print(self.pos.x)
+        # print(self.pos.x)
 
-        if self.pos.x < -100:
+        if self.pos.x < -200:
             self.pos.x = 1400
+
+    def collide(self, playerRect):
+        if self.rect.colliderect(playerRect):
+            return True
 
     def update(self, dt):  # funkcja aktualizująca stan obiektu
         self.move(dt)
