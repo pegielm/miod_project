@@ -15,7 +15,7 @@ class Player(pygame.sprite.Sprite):
 
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)  # pozycja gracza
-        self.speed = 1200
+        self.speed = 900
         self.jump = False
 
     def import_assets(self):
@@ -40,17 +40,21 @@ class Player(pygame.sprite.Sprite):
         self.pos.y += self.direction.y * self.speed * dt
         self.rect.centery = self.pos.y
 
-        if self.jump is True:
+        if self.jump is True and self.direction.y == -1:
+            self.speed -= 500 * dt
+        elif self.jump is True and self.direction.y == 1:
+            self.speed += 500 * dt
+        if self.jump is True and self.pos.y == 480:
             self.direction.y = -1
-            self.speed -= 1200 / 100
-        if self.speed == 0:
+        if self.pos.y < 180:
             self.direction.y = 1
-        elif self.speed == -1200:
-            self.jump = False
+        elif self.pos.y > 480 and self.jump is True:
             self.direction.y = 0
-            self.speed = 1200
+            self.jump = False
+            self.pos.y = 480
+            self.speed = 900
 
-        print(self.speed, self.direction.y)
+        print(self.speed, self.pos.y)
 
     def update(self, dt):  # funkcja aktualizująca stan obiektu
         self.input()
