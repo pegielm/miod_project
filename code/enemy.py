@@ -13,7 +13,6 @@ class Enemy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=pos)
         self.rect = self.rect.inflate(-10, -10)
 
-
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)
         self.speed = 400
