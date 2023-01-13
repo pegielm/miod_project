@@ -3,7 +3,7 @@ class Bee():
         self.sprite = "../sprites/bee.png"
         self.colorkey = (255, 255, 255)
         self.scale = 0.7
-        self.speed = 500
+        self.speed = 5
         self.rect_inflate = (-10, -15)
 
 

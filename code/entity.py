@@ -27,10 +27,10 @@ class Entity(pygame.sprite.Sprite):
         if self.direction.magnitude() > 0:
             self.direction = self.direction.normalize()
         # horizontal movement
-        self.pos.x += self.direction.x * self.speed * dt
+        self.pos.x += self.direction.x * self.speed
         self.rect.centerx = self.pos.x
         # vertical movement
-        self.pos.y += self.direction.y * self.speed * dt
+        self.pos.y += self.direction.y * self.speed
         self.rect.centery = self.pos.y
 
         self.direction.x = -1

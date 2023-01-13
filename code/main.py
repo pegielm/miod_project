@@ -20,7 +20,7 @@ class Game:  # klasa gry
                     pygame.quit()
                     sys.exit()
             # czas od ostatniego wywołania funkcji
-            dt = self.clock.tick() / 1000
+            dt = self.clock.tick(120) / 1000
             self.level.run(dt)  # wywołanie funkcji run z klasy Level
             pygame.display.update()  # aktualizacja ekranu
 

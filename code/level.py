@@ -30,13 +30,14 @@ class Level:  # klasa poziomu
         self.all_sprites.update(dt)
 
     def gameover(self):
+        image = pygame.image.load("../sprites/gameover.png")
+        image = pygame.transform.scale(image, (1280, 720))
+        image.set_colorkey((0, 0, 0))
+        self.display_surface.blit(image, (0, 0))
+        pygame.display.update()
         while True:
-            image = pygame.image.load("../sprites/gameover.png")
-            image = pygame.transform.scale(image, (1280, 720))
-            image.set_colorkey((0, 0, 0))
+            pygame.time.Clock().tick(60)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-            self.display_surface.blit(image, (0, 0))
-            pygame.display.update()
