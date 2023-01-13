@@ -2,7 +2,6 @@ import pygame
 import sys
 from player import Player
 from entity import Entity
-from ground import Ground
 from score import Score
 from entities_config import *
 from settings import *
@@ -17,7 +16,7 @@ class Level:  # klasa poziomu
         self.setup()
 
     def setup(self):
-        self.ground = Ground((640, 620), self.all_sprites)
+        self.ground = Entity((640, 620), self.all_sprites, Ground())
         self.player = Player((160, 480), self.all_sprites)
         self.bee = Entity((1400, 480), self.all_sprites, Bee())
         self.score = Score((SCREEN_WIDTH / 2, 50), self.all_sprites)
