@@ -18,11 +18,13 @@ class Enemy(pygame.sprite.Sprite):
         self.speed = 400
 
     def import_assets(self):
-        self.animations = {'up': [], 'down': [], 'left': [], 'right': []}  # tworzenie słownika animacji
+        # tworzenie słownika animacji
+        self.animations = {'up': [], 'down': [], 'left': [], 'right': []}
 
     def move(self, dt):
 
-        if self.direction.magnitude() > 0:  # jeśli długość wektora jest większa od 0
+        # jeśli długość wektora jest większa od 0
+        if self.direction.magnitude() > 0:
             self.direction = self.direction.normalize()
         # horizontal movement
         self.pos.x += self.direction.x * self.speed * dt
