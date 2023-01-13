@@ -19,8 +19,8 @@ class Player(pygame.sprite.Sprite):
         self.speed = 900
         self.jump = False
 
-    def import_assets(self):
-        self.animations = {'up': [], 'down': [], 'left': [], 'right': []}  # tworzenie słownika animacji
+    def import_assets(self):  # tworzenie słownika animacji
+        self.animations = {'up': [], 'down': [], 'left': [], 'right': []}
 
     def input(self):
         keys = pygame.key.get_pressed()
@@ -29,7 +29,8 @@ class Player(pygame.sprite.Sprite):
 
     def move(self, dt):
 
-        if self.direction.magnitude() > 0:  # jeśli długość wektora jest większa od 0
+        # jeśli długość wektora jest większa od 0
+        if self.direction.magnitude() > 0:
             self.direction = self.direction.normalize()
         # horizontal movement
         self.pos.x += self.direction.x * self.speed * dt
