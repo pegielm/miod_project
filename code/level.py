@@ -17,7 +17,7 @@ class Level:  # klasa poziomu
 
     def setup(self):
         self.ground = Entity((640, 620), self.all_sprites, Ground())
-        self.player = Player((160, 480), self.all_sprites)
+        self.player = Player((160, 480), self.all_sprites, PlayerEntity())
         self.bee = Entity((1400, 480), self.all_sprites, Bee())
         self.score = Score((SCREEN_WIDTH / 2, 50), self.all_sprites)
 
