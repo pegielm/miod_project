@@ -1,6 +1,9 @@
+SPRITE_PATH = "../sprites/"
+
+
 class PlayerEntity():
     def __init__(self):
-        self.sprite = "../sprites/bear.png"
+        self.sprite = SPRITE_PATH + "bear.png"
         self.colorkey = (255, 255, 255)
         self.scale = 0.8
         self.speed = 6
@@ -10,7 +13,7 @@ class PlayerEntity():
 
 class Ground():
     def __init__(self):
-        self.sprite = "../sprites/tlo.png"
+        self.sprite = SPRITE_PATH + "tlo.png"
         self.colorkey = (255, 255, 255)
         self.scale = 1
         self.speed = 0
@@ -19,7 +22,7 @@ class Ground():
 
 class Bee():
     def __init__(self):
-        self.sprite = "../sprites/bee.png"
+        self.sprite = SPRITE_PATH + "bee.png"
         self.colorkey = (255, 255, 255)
         self.scale = 0.7
         self.speed = 5
