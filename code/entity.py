@@ -1,21 +1,21 @@
 import pygame
 
 
-class Enemy(pygame.sprite.Sprite):
-    def __init__(self, pos, group, enemySprite, spriteScale):
+class Entity(pygame.sprite.Sprite):
+    def __init__(self, pos, group, entity):
         super().__init__(group)
         # setup
-        self.image = pygame.image.load(enemySprite).convert()
+        self.image = pygame.image.load(entity.sprite).convert()
         size = self.image.get_size()
-        size = (size[0] * spriteScale, size[1] * spriteScale)
+        size = (size[0] * entity.scale, size[1] * entity.scale)
         self.image = pygame.transform.scale(self.image, size)
-        self.image.set_colorkey((255, 255, 255))
+        self.image.set_colorkey(entity.colorkey)
         self.rect = self.image.get_rect(center=pos)
-        self.rect = self.rect.inflate(-10, -10)
+        self.rect = self.rect.inflate(entity.rect_inflate)
 
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)
-        self.speed = 400
+        self.speed = entity.speed
 
     def import_assets(self):
         # tworzenie słownika animacji

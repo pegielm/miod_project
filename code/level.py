@@ -1,9 +1,10 @@
 import pygame
 import sys
 from player import Player
-from enemy import Enemy
+from entity import Entity
 from ground import Ground
 from score import Score
+from entities_config import *
 from settings import *
 
 
@@ -18,7 +19,7 @@ class Level:  # klasa poziomu
     def setup(self):
         self.ground = Ground((640, 620), self.all_sprites)
         self.player = Player((160, 480), self.all_sprites)
-        self.bee = Enemy((1400, 480), self.all_sprites, "../sprites/bee.png", 0.7)
+        self.bee = Entity((1400, 480), self.all_sprites, Bee())
         self.score = Score((SCREEN_WIDTH / 2, 50), self.all_sprites)
 
     def run(self, dt):  # funkcja odpowiadająca za działanie poziomu
