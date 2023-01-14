@@ -19,10 +19,24 @@ class Game:  # klasa gry
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-            # czas od ostatniego wywołania funkcji
+                if event.type == GAMEOVER:
+                    self.gameover()
+
             dt = self.clock.tick(FPS_CAP) / 1000
             self.level.run(dt)  # wywołanie funkcji run z klasy Level
             pygame.display.update()  # aktualizacja ekranu
+
+    def gameover(self):
+        image = pygame.image.load("../sprites/gameover.png")
+        image = pygame.transform.scale(image, (1280, 720))
+        image.set_colorkey((0, 0, 0))
+        self.screen.blit(image, (0, 0))
+        pygame.display.update()
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
 
 
 if __name__ == '__main__':  # pętla gry
