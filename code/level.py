@@ -24,20 +24,8 @@ class Level:  # klasa poziomu
     def run(self, dt):  # funkcja odpowiadająca za działanie poziomu
         self.display_surface.fill('blue')
         self.all_sprites.draw(self.display_surface)
-        # if self.bee.collide(self.player.rect):
-        #     print("COLLISION")
-        #     self.gameover()
         self.all_sprites.update(dt)
-
-    def gameover(self):
-        image = pygame.image.load("../sprites/gameover.png")
-        image = pygame.transform.scale(image, (1280, 720))
-        image.set_colorkey((0, 0, 0))
-        self.display_surface.blit(image, (0, 0))
-        pygame.display.update()
-        while True:
-            pygame.time.Clock().tick(60)
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
+        if self.bee.collide(self.player.rect):
+            noneDict = {None: None}
+            gameoverEvent = pygame.event.Event(GAMEOVER, noneDict)
+            pygame.event.post(gameoverEvent)

@@ -42,13 +42,9 @@ class Player(pygame.sprite.Sprite):
         self.pos.y += self.direction.y * self.speed
         self.rect.centery = self.pos.y
 
-        # print(self.pos.y, dt)
-
         if self.jump is True:
             if self.pos.y == self.properties[0][1]:
                 self.direction.y = -1
-            elif self.pos.y < self.properties[0][1] - self.jumpHeight:
-                self.direction.y = 1
             elif self.pos.y > self.properties[0][1]:
                 self.direction.y = 0
                 self.jump = False
@@ -56,9 +52,7 @@ class Player(pygame.sprite.Sprite):
                 self.speed = self.properties[1]
 
             if self.direction.y == -1:
-                self.speed -= 1.6 * dt
-            elif self.direction.y == 1:
-                self.speed += 1.6 * dt
+                self.speed -= 12.5 * dt
 
     def update(self, dt):  # funkcja aktualizująca stan obiektu
         self.input()

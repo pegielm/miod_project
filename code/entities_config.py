@@ -6,9 +6,9 @@ class PlayerEntity():
         self.sprite = SPRITE_PATH + "bear.png"
         self.colorkey = (255, 255, 255)
         self.scale = 0.8
-        self.speed = 6
+        self.speed = 8
         self.rect_inflate = (-40, -40)
-        self.jumpHeight = 300
+        self.jumpHeight = 8000
 
 
 class Ground():
