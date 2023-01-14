@@ -24,9 +24,9 @@ class Level:  # klasa poziomu
     def run(self, dt):  # funkcja odpowiadająca za działanie poziomu
         self.display_surface.fill('blue')
         self.all_sprites.draw(self.display_surface)
-        if self.bee.collide(self.player.rect):
-            print("COLLISION")
-            self.gameover()
+        # if self.bee.collide(self.player.rect):
+        #     print("COLLISION")
+        #     self.gameover()
         self.all_sprites.update(dt)
 
     def gameover(self):
