@@ -20,8 +20,8 @@ class Game:  # klasa gry
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                # if event.type == GAMEOVER:
-                #     self.gameover()
+                if event.type == GAMEOVER:
+                    self.gameover()
 
             dt = self.clock.tick(FPS_CAP) / 1000
             self.level.run(dt)  # wywołanie funkcji run z klasy Level
