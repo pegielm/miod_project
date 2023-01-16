@@ -19,9 +19,11 @@ class Level:  # klasa poziomu
         self.ground = Entity((640, 620), self.all_sprites, Ground())
         self.score = Score((SCREEN_WIDTH / 2, 50), self.all_sprites)
         self.player = Player((160, 480), self.all_sprites, PlayerEntity())
-        self.bee = Entity((1400, 480), self.all_sprites, Bee())
-        self.honeypot = Entity((1400, 330),
-                               self.all_sprites, Honeypot())
+        self.bees = []
+        self.bees.append(Entity((1400, 480), self.all_sprites, Bee()))
+        self.honeypots = []
+        self.honeypots.append(Entity((1400, 330),
+                                    self.all_sprites, Honeypot()))
         self.honeypotCounter = 0
         self.gameoverEvent = pygame.event.Event(GAMEOVER, NONEDICT)
 
@@ -30,14 +32,20 @@ class Level:  # klasa poziomu
         diceroll = randint(1, FPS_CAP * 10)
         # print(diceroll)
         if diceroll == 1 or diceroll == 3:
-            self.bee = Entity((1400, 480), self.all_sprites, Bee())
+            self.bees.append(Entity((1400, 480), self.all_sprites, Bee()))
         elif diceroll == 2:
             self.honeypot = Entity((1400, 330),
                                    self.all_sprites, Honeypot())
         self.all_sprites.draw(self.display_surface)
         self.all_sprites.update(dt)
 
-        if self.bee.collide(self.player.rect):
-            pygame.event.post(self.gameoverEvent)
-        if self.honeypot.collide(self.player.rect):
-            self.honeypotCounter += 1
+        for bee in self.bees:
+            if bee.collide(self.player.rect):
+                pygame.event.post(self.gameoverEvent)
+            if bee.pos.x < -200:
+                self.bees.pop(0)
+        for honeypot in self.honeypots:
+            if honeypot.collide(self.player.rect):
+                self.honeypotCounter += 1
+            if honeypot.pos.x < -200:
+                self.honeypots.pop(0)
