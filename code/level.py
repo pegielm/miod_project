@@ -20,8 +20,9 @@ class Level:  # klasa poziomu
         self.score = Score((SCREEN_WIDTH / 2, 50), self.all_sprites)
         self.player = Player((160, 480), self.all_sprites, PlayerEntity())
         self.bee = Entity((1400, 480), self.all_sprites, Bee())
-        self.honeypot = Entity((1400, 330 * (randint(1, 10)) / 6),
+        self.honeypot = Entity((1400, 330),
                                self.all_sprites, Honeypot())
+        self.honeypotCounter = 0
         self.gameoverEvent = pygame.event.Event(GAMEOVER, NONEDICT)
 
     def run(self, dt):  # funkcja odpowiadająca za działanie poziomu
@@ -31,9 +32,12 @@ class Level:  # klasa poziomu
         if diceroll == 1 or diceroll == 3:
             self.bee = Entity((1400, 480), self.all_sprites, Bee())
         elif diceroll == 2:
-            self.honeypot = Entity((1400, 330 * (randint(1, 50)) / 50),
+            self.honeypot = Entity((1400, 330),
                                    self.all_sprites, Honeypot())
         self.all_sprites.draw(self.display_surface)
         self.all_sprites.update(dt)
+
         if self.bee.collide(self.player.rect):
             pygame.event.post(self.gameoverEvent)
+        if self.honeypot.collide(self.player.rect):
+            self.honeypotCounter += 1
