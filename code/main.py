@@ -8,7 +8,8 @@ class Game:  # klasa gry
     def __init__(self):  # konstruktor gry
         pygame.init()
         self.screen = pygame.display.set_mode(
-            (SCREEN_WIDTH, SCREEN_HEIGHT))  # tworzenie okna gry
+            (SCREEN_WIDTH, SCREEN_HEIGHT),
+            pygame.DOUBLEBUF)  # tworzenie okna gry
         pygame.display.set_caption("test_title")
         self.clock = pygame.time.Clock()
         self.level = Level()
@@ -19,8 +20,8 @@ class Game:  # klasa gry
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                if event.type == GAMEOVER:
-                    self.gameover()
+                # if event.type == GAMEOVER:
+                #     self.gameover()
 
             dt = self.clock.tick(FPS_CAP) / 1000
             self.level.run(dt)  # wywołanie funkcji run z klasy Level

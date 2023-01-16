@@ -16,11 +16,10 @@ class Player(pygame.sprite.Sprite):
 
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)  # pozycja gracza
-        self.speed = entity.speed
+        self.speed = entity.speed * 115
         self.jump = False
-        self.jumpHeight = entity.jumpHeight
 
-        self.properties = [pos, entity.speed]
+        self.properties = [pos, entity.speed * 115]
 
     def import_assets(self):  # tworzenie słownika animacji
         self.animations = {'up': [], 'down': [], 'left': [], 'right': []}
@@ -36,11 +35,13 @@ class Player(pygame.sprite.Sprite):
         if self.direction.magnitude() > 0:
             self.direction = self.direction.normalize()
         # horizontal movement
-        self.pos.x += self.direction.x * self.speed
+        self.pos.x += self.direction.x * self.speed * dt
         self.rect.centerx = self.pos.x
         # vertical movement
-        self.pos.y += self.direction.y * self.speed
+        self.pos.y += self.direction.y * self.speed * dt
         self.rect.centery = self.pos.y
+
+        print(self.pos.y)
 
         if self.jump is True:
             if self.pos.y == self.properties[0][1]:
@@ -52,7 +53,7 @@ class Player(pygame.sprite.Sprite):
                 self.speed = self.properties[1]
 
             if self.direction.y == -1:
-                self.speed -= 12.5 * dt
+                self.speed -= 12.5 * dt * 115
 
     def update(self, dt):  # funkcja aktualizująca stan obiektu
         self.input()

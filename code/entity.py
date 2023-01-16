@@ -15,7 +15,7 @@ class Entity(pygame.sprite.Sprite):
 
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)
-        self.speed = entity.speed
+        self.speed = entity.speed * 115
 
     def import_assets(self):
         # tworzenie słownika animacji
@@ -27,10 +27,10 @@ class Entity(pygame.sprite.Sprite):
         if self.direction.magnitude() > 0:
             self.direction = self.direction.normalize()
         # horizontal movement
-        self.pos.x += self.direction.x * self.speed
+        self.pos.x += self.direction.x * self.speed * dt
         self.rect.centerx = self.pos.x
         # vertical movement
-        self.pos.y += self.direction.y * self.speed
+        self.pos.y += self.direction.y * self.speed * dt
         self.rect.centery = self.pos.y
 
         self.direction.x = -1

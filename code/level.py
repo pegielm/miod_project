@@ -1,5 +1,4 @@
 import pygame
-import sys
 from player import Player
 from entity import Entity
 from score import Score
