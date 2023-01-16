@@ -41,8 +41,6 @@ class Player(pygame.sprite.Sprite):
         self.pos.y += self.direction.y * self.speed * dt
         self.rect.centery = self.pos.y
 
-        # print(self.pos.y)
-
         if self.jump is True:
             if self.pos.y == self.properties[0][1]:
                 self.direction.y = -1

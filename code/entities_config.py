@@ -16,7 +16,7 @@ class Ground():
         self.sprite = SPRITE_PATH + "tlo.png"
         self.colorkey = (255, 255, 255)
         self.scale = 1
-        self.speed = 0
+        self.speed = 3
         self.rect_inflate = (0, 0)
 
 

@@ -16,7 +16,7 @@ class Level:  # klasa poziomu
         self.setup()
 
     def setup(self):
-        self.ground = Entity((640, 620), self.all_sprites, Ground())
+        self.ground = Entity((1280, 620), self.all_sprites, Ground())
         self.score = Score((100, 50))
         self.points = Score((SCREEN_WIDTH - 100, 50))
         self.player = Player((160, 480), self.all_sprites, PlayerEntity())
@@ -27,17 +27,21 @@ class Level:  # klasa poziomu
                                      self.all_sprites, Honeypot()))
         self.honeypotCounter = 0
         self.gameoverEvent = pygame.event.Event(GAMEOVER, NONEDICT)
+        print(self.ground.speed)
 
     def run(self, dt):  # funkcja odpowiadająca za działanie poziomu
         self.display_surface.fill('blue')
 
         diceroll = randint(1, FPS_CAP * 10)
-        print(diceroll)
-        if diceroll == 1 or diceroll == 100:
+        if diceroll == 1 or diceroll == 123:
             self.bees.append(Entity((1400, 480), self.all_sprites, Bee()))
         elif diceroll == 2:
             self.honeypots.append(Entity((1400, 330),
                                          self.all_sprites, Honeypot()))
+
+        if self.ground.pos.x <= 0:
+            self.ground.pos.x = 1280
+
 
         self.all_sprites.draw(self.display_surface)
         self.score.update(dt)
@@ -46,7 +50,6 @@ class Level:  # klasa poziomu
         self.display_surface.blit(self.points.sprite, (SCREEN_WIDTH - 210, 40))
         self.all_sprites.update(dt)
 
-        # print(self.honeypots)
         for bee in self.bees:
             if bee.collide(self.player.rect):
                 pygame.event.post(self.gameoverEvent)
@@ -55,6 +58,8 @@ class Level:  # klasa poziomu
         for honeypot in self.honeypots:
             if honeypot.collide(self.player.rect):
                 self.honeypotCounter += 1
+                self.ground.speed += self.honeypotCounter * 10
+                print(self.ground.speed)
                 self.points.print_score(self.honeypotCounter)
                 honeypot.pos.x = -180
             if honeypot.pos.x < -200:
