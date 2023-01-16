@@ -14,6 +14,6 @@ class Score(pygame.sprite.Sprite):
         self.image = self.font.render(score, True, "pink")
 
     def update(self, dt):
-        # get current time
+        # get currenttime
         current_time = round(pygame.time.get_ticks() / 1000)
         self.print_score(current_time)
