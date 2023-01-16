@@ -31,14 +31,15 @@ class Level:  # klasa poziomu
         self.display_surface.fill('blue')
         diceroll = randint(1, FPS_CAP * 10)
         # print(diceroll)
-        if diceroll == 1 or diceroll == 3:
+        if diceroll == 1 or diceroll == 100:
             self.bees.append(Entity((1400, 480), self.all_sprites, Bee()))
         elif diceroll == 2:
-            self.honeypot = Entity((1400, 330),
-                                   self.all_sprites, Honeypot())
+            self.honeypots.append(Entity((1400, 330),
+                                   self.all_sprites, Honeypot()))
         self.all_sprites.draw(self.display_surface)
         self.all_sprites.update(dt)
 
+        print(self.honeypots)
         for bee in self.bees:
             if bee.collide(self.player.rect):
                 pygame.event.post(self.gameoverEvent)
@@ -47,5 +48,6 @@ class Level:  # klasa poziomu
         for honeypot in self.honeypots:
             if honeypot.collide(self.player.rect):
                 self.honeypotCounter += 1
+                honeypot.pos.x = -180
             if honeypot.pos.x < -200:
                 self.honeypots.pop(0)

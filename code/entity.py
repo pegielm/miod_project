@@ -37,9 +37,6 @@ class Entity(pygame.sprite.Sprite):
 
         # print(self.pos.x)
 
-        if self.pos.x < -200:
-            del self
-
     def collide(self, playerRect):
         if self.rect.colliderect(playerRect):
             return True
