@@ -5,7 +5,6 @@ from score import Score
 from random import randint
 from entities_config import *
 from settings import *
-from points import Points
 
 
 class Level:  # klasa poziomu
@@ -18,30 +17,36 @@ class Level:  # klasa poziomu
 
     def setup(self):
         self.ground = Entity((640, 620), self.all_sprites, Ground())
-        self.score = Score((100, 50), self.all_sprites)
-        self.points = Points((SCREEN_WIDTH -100 , 50), self.all_sprites , PointsEntity())
+        self.score = Score((100, 50))
+        self.points = Score((SCREEN_WIDTH - 100, 50))
         self.player = Player((160, 480), self.all_sprites, PlayerEntity())
         self.bees = []
         self.bees.append(Entity((1400, 480), self.all_sprites, Bee()))
         self.honeypots = []
         self.honeypots.append(Entity((1400, 330),
-                                    self.all_sprites, Honeypot()))
+                                     self.all_sprites, Honeypot()))
         self.honeypotCounter = 0
         self.gameoverEvent = pygame.event.Event(GAMEOVER, NONEDICT)
 
     def run(self, dt):  # funkcja odpowiadająca za działanie poziomu
         self.display_surface.fill('blue')
+
         diceroll = randint(1, FPS_CAP * 10)
-        # print(diceroll)
+        print(diceroll)
         if diceroll == 1 or diceroll == 100:
             self.bees.append(Entity((1400, 480), self.all_sprites, Bee()))
         elif diceroll == 2:
             self.honeypots.append(Entity((1400, 330),
-                                   self.all_sprites, Honeypot()))
+                                         self.all_sprites, Honeypot()))
+
         self.all_sprites.draw(self.display_surface)
+        self.score.update(dt)
+        self.display_surface.blit(self.score.image, (50, 25))
+        self.display_surface.blit(self.points.honeypotsImage, (SCREEN_WIDTH - 150, 25))
+        self.display_surface.blit(self.points.sprite, (SCREEN_WIDTH - 210, 40))
         self.all_sprites.update(dt)
 
-        print(self.honeypots)
+        # print(self.honeypots)
         for bee in self.bees:
             if bee.collide(self.player.rect):
                 pygame.event.post(self.gameoverEvent)
