@@ -33,6 +33,6 @@ class Honeypot():
     def __init__(self):
         self.sprite = SPRITE_PATH + "honeypot.png"
         self.colorkey = (255, 255, 255)
-        self.scale = 1
-        self.speed = 0
+        self.scale = 0.3
+        self.speed = 3
         self.rect_inflate = (0, 0)
