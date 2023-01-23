@@ -42,7 +42,6 @@ class Level:  # klasa poziomu
         if self.ground.pos.x <= 0:
             self.ground.pos.x = 1280
 
-
         self.all_sprites.draw(self.display_surface)
         self.score.update(dt)
         self.display_surface.blit(self.score.image, (50, 25))
