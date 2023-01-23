@@ -1,4 +1,5 @@
 import pygame
+from settings import *
 
 
 class Entity(pygame.sprite.Sprite):
@@ -10,7 +11,8 @@ class Entity(pygame.sprite.Sprite):
         size = (size[0] * entity.scale, size[1] * entity.scale)
         self.image = pygame.transform.scale(self.image, size)
         self.image.set_colorkey(entity.colorkey)
-        self.rect = self.image.get_rect(center=pos)
+        self.rect = self.image.get_rect(center=(pos[0] * SCALE,
+                                                pos[1] * SCALE))
         self.rect = self.rect.inflate(entity.rect_inflate)
 
         self.direction = pygame.math.Vector2()

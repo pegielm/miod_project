@@ -1,4 +1,5 @@
 import pygame
+from settings import *
 
 
 class Player(pygame.sprite.Sprite):
@@ -11,7 +12,8 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, size)
         self.image.set_colorkey(entity.colorkey)
         # self.image.fill('green')
-        self.rect = self.image.get_rect(center=pos)
+        self.rect = self.image.get_rect(center=(pos[0] * SCALE,
+                                                pos[1] * SCALE))
         self.rect = self.rect.inflate(entity.rect_inflate)
 
         self.direction = pygame.math.Vector2()
@@ -19,7 +21,7 @@ class Player(pygame.sprite.Sprite):
         self.speed = entity.speed * 115
         self.jump = False
 
-        self.properties = [pos, entity.speed * 115]
+        self.properties = [(self.rect.centerx, self.rect.centery), entity.speed * 115]
 
     def import_assets(self):  # tworzenie słownika animacji
         self.animations = {'up': [], 'down': [], 'left': [], 'right': []}
@@ -41,6 +43,8 @@ class Player(pygame.sprite.Sprite):
         self.pos.y += self.direction.y * self.speed * dt
         self.rect.centery = self.pos.y
 
+        print(self.speed)
+
         if self.jump is True:
             if self.pos.y == self.properties[0][1]:
                 self.direction.y = -1
@@ -51,7 +55,7 @@ class Player(pygame.sprite.Sprite):
                 self.speed = self.properties[1]
 
             if self.direction.y == -1:
-                self.speed -= 12.5 * dt * 115
+                self.speed -= 12.5 * dt * 115 * SCALE
 
     def update(self, dt):  # funkcja aktualizująca stan obiektu
         self.input()

@@ -29,7 +29,7 @@ class Game:  # klasa gry
 
     def gameover(self):
         image = pygame.image.load("../sprites/gameover.png")
-        image = pygame.transform.scale(image, (1280, 720))
+        image = pygame.transform.scale(image, (SCREEN_WIDTH, SCREEN_HEIGHT))
         image.set_colorkey((0, 0, 0))
         self.screen.blit(image, (0, 0))
         pygame.display.update()
@@ -41,5 +41,4 @@ class Game:  # klasa gry
 
 
 if __name__ == '__main__':  # pętla gry
-    game = Game()
-    game.run()
+    Game().run()

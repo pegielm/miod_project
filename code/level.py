@@ -17,8 +17,8 @@ class Level:  # klasa poziomu
 
     def setup(self):
         self.ground = Entity((1280, 620), self.all_sprites, Ground())
-        self.score = Score((100, 50))
-        self.points = Score((SCREEN_WIDTH - 100, 50))
+        self.score = Score()
+        self.points = Score()
         self.player = Player((160, 480), self.all_sprites, PlayerEntity())
         self.bees = []
         self.bees.append(Entity((1400, 480), self.all_sprites, Bee()))
@@ -40,13 +40,13 @@ class Level:  # klasa poziomu
                                          self.all_sprites, Honeypot()))
 
         if self.ground.pos.x <= 0:
-            self.ground.pos.x = 1280
+            self.ground.pos.x = 1280 * SCALE
 
         self.all_sprites.draw(self.display_surface)
         self.score.update(dt)
-        self.display_surface.blit(self.score.image, (50, 25))
-        self.display_surface.blit(self.points.honeypotsImage, (SCREEN_WIDTH - 150, 25))
-        self.display_surface.blit(self.points.sprite, (SCREEN_WIDTH - 210, 40))
+        self.display_surface.blit(self.score.image, (50 * SCALE, 25 * SCALE))
+        self.display_surface.blit(self.points.honeypotsImage, (SCREEN_WIDTH - 150 * SCALE, 25 * SCALE))
+        self.display_surface.blit(self.points.sprite, (SCREEN_WIDTH - 210 * SCALE, 40 * SCALE))
         self.all_sprites.update(dt)
 
         for bee in self.bees:

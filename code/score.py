@@ -1,14 +1,15 @@
 import pygame
+from settings import *
 
 
 class Score():
-    def __init__(self, pos):
-        self.font = pygame.font.SysFont('comicsansms', 50)
+    def __init__(self):
+        self.font = pygame.font.SysFont('comicsansms', int(50 * SCALE))
 
         self.sprite = pygame.image.load("../sprites/honeypot.png").convert()
         self.sprite.set_colorkey((255, 255, 255))
         size = self.sprite.get_size()
-        size = (size[0] * 0.22, size[1] * 0.22)
+        size = (size[0] * 0.22 * SCALE, size[1] * 0.22 * SCALE)
         self.sprite = pygame.transform.scale(self.sprite, size)
 
         self.image = self.font.render('0', True, "white")
