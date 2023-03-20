@@ -7,10 +7,8 @@
  - Przeskakiwanie przez płoty, wrogów(pszczół?) itp
 
 ## Autorzy
-1. Michał Pęgiel
-2. Pavel Apunevich
-3. Wojtek Cieplichiewicz
-4. Jakub Miśta
+
+grupa miód
 
 ## Inspiracja
 [Chrome Dino](https://chromedino.com/)
